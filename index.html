@@ -19,37 +19,40 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(30,144,255,.10), transparent 60%),
-      radial-gradient(900px 500px at -10% 20%, rgba(0,191,255,.08), transparent 55%),
-      var(--bg);
+    background: var(--bg);
     color: var(--text);
     font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.65; padding-bottom: 70px; overflow-x: hidden;
   }
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 22px; }
+  /* фоновые слои: цифровой дождь + нейросеть */
+  canvas.layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  #net { z-index: 0; opacity: .9; }
+  #rain { z-index: 0; opacity: .55; }
+  .wrap { position: relative; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 22px; }
   h1, h2, h3, .font-tech { font-family: "Orbitron", "Inter", sans-serif; }
   a { color: var(--blue); text-decoration: none; }
-  a:hover { text-decoration: none; text-shadow: 0 0 12px rgba(0,191,255,.6); }
+  a:hover { text-shadow: 0 0 12px rgba(0,191,255,.6); }
 
   /* ---------- header / hero ---------- */
-  header { padding: 66px 0 34px; text-align: center; }
-  .avatar { position: relative; width: 200px; height: 200px; margin: 0 auto 26px; }
+  header { padding: 60px 0 34px; text-align: center; }
+  .avatar { position: relative; width: 210px; height: 210px; margin: 0 auto 26px; }
   .avatar img {
-    width: 200px; height: 200px; object-fit: cover; border-radius: 50%;
+    width: 210px; height: 210px; object-fit: cover; border-radius: 50%;
     border: 2px solid var(--border-hi);
-    box-shadow: 0 0 30px rgba(0,191,255,.35), 0 0 70px rgba(0,191,255,.15);
+    box-shadow: 0 0 34px rgba(0,191,255,.40), 0 0 90px rgba(0,191,255,.18);
     animation: pulse 4s ease-in-out infinite;
   }
-  .avatar::after {
-    content: ""; position: absolute; inset: -12px; border-radius: 50%;
-    border: 1px solid rgba(0,191,255,.25);
+  .avatar::before, .avatar::after {
+    content: ""; position: absolute; border-radius: 50%;
+    border: 1px solid rgba(0,191,255,.28);
     animation: ring 4s ease-in-out infinite;
   }
-  @keyframes pulse { 0%,100% { box-shadow: 0 0 26px rgba(0,191,255,.30), 0 0 60px rgba(0,191,255,.14);} 50% { box-shadow: 0 0 44px rgba(0,191,255,.50), 0 0 96px rgba(0,191,255,.22);} }
-  @keyframes ring { 0%,100% { transform: scale(1); opacity:.5; } 50% { transform: scale(1.08); opacity:1; } }
+  .avatar::before { inset: -8px; }
+  .avatar::after { inset: -18px; border-color: rgba(255,215,0,.20); animation-delay: .5s; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 30px rgba(0,191,255,.32), 0 0 70px rgba(0,191,255,.15);} 50% { box-shadow: 0 0 52px rgba(0,191,255,.55), 0 0 120px rgba(0,191,255,.24);} }
+  @keyframes ring { 0%,100% { transform: scale(1); opacity:.4; } 50% { transform: scale(1.07); opacity:1; } }
 
-  header h1 { font-size: 2.5em; letter-spacing: 1px; margin-bottom: 10px; }
+  header h1 { font-size: 2.6em; letter-spacing: 2px; margin-bottom: 10px; }
   header h1 span { background: linear-gradient(90deg, var(--blue), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
   header p.sub { color: var(--muted); font-size: 1.12em; max-width: 640px; margin: 0 auto; }
   .badge { display: inline-block; background: rgba(0,191,255,.12); color: var(--blue);
@@ -70,7 +73,7 @@
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 16px; }
   .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
     position: relative; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-  .card:hover { transform: translateY(-3px); border-color: var(--border-hi); box-shadow: var(--glow-blue); }
+  .card:hover { transform: translateY(-4px); border-color: var(--border-hi); box-shadow: var(--glow-blue); }
   .card .ico { font-size: 1.7em; margin-bottom: 8px; filter: drop-shadow(0 0 6px rgba(0,191,255,.5)); }
   .card h3 { font-size: 1.02em; margin-bottom: 6px; }
   .card .price { color: var(--gold); font-weight: 700; font-size: 1.12em; margin: 9px 0;
@@ -87,7 +90,6 @@
   .shot .body { padding: 16px; }
   .shot img { width: 100%; border-radius: 8px; }
 
-  /* chat mockup */
   .chat { background: #0c1122; border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: .86em; }
   .chat .m { margin: 8px 0; max-width: 85%; padding: 8px 12px; border-radius: 12px; }
   .chat .m.user { background: rgba(30,144,255,.18); border: 1px solid var(--border-hi); margin-left: auto; text-align: right; color: var(--text); }
@@ -101,7 +103,6 @@
   .chat .bars i:nth-child(1){ height: 50%; } .chat .bars i:nth-child(6){ height: 45%; animation-delay:.5s; }
   @keyframes eq { 0%,100% { transform: scaleY(.5);} 50% { transform: scaleY(1.2);} }
 
-  /* terminal mockup */
   .term { background: #070b16; border: 1px solid var(--border); border-radius: 10px; padding: 14px;
     font-family: "Consolas", "Menlo", monospace; font-size: .82em; line-height: 1.7; overflow-x: auto; }
   .term .bar { color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 10px; }
@@ -111,20 +112,17 @@
   .term .ok { color: #3fb950; }
   .term .hl { color: var(--gold); }
 
-  /* forks */
   .forks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
   .fork { border: 1px solid var(--border); border-radius: 20px; padding: 7px 15px; font-size: .86em; color: var(--text);
     transition: all .16s ease; }
   .fork:hover { border-color: var(--border-hi); color: var(--blue); box-shadow: var(--glow-blue); }
 
-  /* table */
   table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); }
   th { color: var(--muted); font-weight: 600; font-size: .82em; text-transform: uppercase; letter-spacing: .5px; }
   tr:last-child td { border-bottom: none; }
   td b { color: var(--gold); text-shadow: 0 0 10px rgba(255,215,0,.4); }
 
-  /* steps */
   .steps { counter-reset: s; }
   .step { display: flex; gap: 16px; margin-bottom: 18px; }
   .step .n { counter-increment: s; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%;
@@ -134,7 +132,6 @@
   .step h3 { margin-bottom: 4px; font-size: 1em; }
   .step p { color: var(--muted); }
 
-  /* contact */
   .contact { text-align: center; }
   .btn { display: inline-block; background: linear-gradient(135deg, var(--blue), var(--blue2)); color: #06101f;
     font-weight: 700; padding: 13px 30px; border-radius: 9px; margin: 6px; font-family: "Orbitron", sans-serif;
@@ -148,6 +145,8 @@
 </style>
 </head>
 <body>
+<canvas id="net" class="layer"></canvas>
+<canvas id="rain" class="layer"></canvas>
 <div class="wrap">
 
   <header>
@@ -245,5 +244,87 @@
 
   <footer>Ирен · быстрая разработка под заказ · <span class="dot">▮</span> демо до оплаты</footer>
 </div>
+
+<script>
+// ===== Цифровой дождь (Matrix, сине-золотой) =====
+(function () {
+  const c = document.getElementById('rain'), x = c.getContext('2d');
+  const chars = 'アイウエオカキクケコサシスセソ01<>/#$%&*+=?';
+  let w, h, cols, drops, head;
+  function resize() { w = c.width = innerWidth; h = c.height = innerHeight; cols = Math.floor(w / 16); drops = Array.from({length: cols}, () => Math.random() * h); head = Array(cols).fill(0); }
+  resize(); addEventListener('resize', resize);
+  function tick() {
+    x.fillStyle = 'rgba(10,14,26,0.12)'; x.fillRect(0, 0, w, h);
+    x.font = '15px monospace';
+    for (let i = 0; i < cols; i++) {
+      const ch = chars[Math.floor(Math.random() * chars.length)];
+      const y = drops[i] * 16;
+      x.fillStyle = 'rgba(0,191,255,0.75)'; x.fillText(ch, i * 16, y);
+      // золотая «голова» капли
+      if (Math.random() < 0.25) { x.fillStyle = 'rgba(255,215,0,0.9)'; x.fillText(ch, i * 16, y); }
+      if (y > h && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    }
+  }
+  setInterval(tick, 50);
+})();
+
+// ===== Нейросетевые линии (узлы + связи) =====
+(function () {
+  const c = document.getElementById('net'), x = c.getContext('2d');
+  const N = 60; const nodes = [];
+  let w, h;
+  function resize() { w = c.width = innerWidth; h = c.height = innerHeight; }
+  resize(); addEventListener('resize', resize);
+  for (let i = 0; i < N; i++) nodes.push({ x: Math.random(), y: Math.random(), vx: (Math.random() - .5) * .0012, vy: (Math.random() - .5) * .0012, g: Math.random() < .15 });
+  function tick() {
+    x.clearRect(0, 0, w, h);
+    for (const n of nodes) {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > 1) n.vx *= -1;
+      if (n.y < 0 || n.y > 1) n.vy *= -1;
+    }
+    for (let i = 0; i < N; i++) {
+      for (let j = i + 1; j < N; j++) {
+        const dx = (nodes[i].x - nodes[j].x) * w, dy = (nodes[i].y - nodes[j].y) * h;
+        const d = Math.hypot(dx, dy);
+        if (d < 160) {
+          x.strokeStyle = 'rgba(0,191,255,' + (0.28 * (1 - d / 160)) + ')';
+          x.lineWidth = 0.6;
+          x.beginPath(); x.moveTo(nodes[i].x * w, nodes[i].y * h); x.lineTo(nodes[j].x * w, nodes[j].y * h); x.stroke();
+        }
+      }
+    }
+    for (const n of nodes) {
+      x.fillStyle = n.g ? 'rgba(255,215,0,.9)' : 'rgba(0,191,255,.8)';
+      x.beginPath(); x.arc(n.x * w, n.y * h, n.g ? 2.4 : 1.8, 0, Math.PI * 2); x.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// ===== Звук при наведении (Web Audio, мягкий «пик») =====
+(function () {
+  let actx = null;
+  function ensure() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } if (actx && actx.state === 'suspended') actx.resume(); }
+  function blip(freq, dur) {
+    if (!actx || actx.state !== 'running') return;
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.type = 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.12, actx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + dur);
+    o.connect(g); g.connect(actx.destination);
+    o.start(); o.stop(actx.currentTime + dur);
+  }
+  // браузер разрешает звук только после жеста — резолвим по первому клику/нажатию
+  addEventListener('pointerdown', ensure, { once: false });
+  addEventListener('keydown', ensure, { once: false });
+  document.querySelectorAll('.card, .shot, .fork, .btn').forEach(el => {
+    el.addEventListener('mouseenter', () => blip(el.classList.contains('btn') ? 880 : 620, 0.16));
+  });
+})();
+</script>
 </body>
 </html>
