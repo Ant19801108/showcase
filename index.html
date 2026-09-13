@@ -3,61 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Liberti — боты, сайты, AI-автоматизация под заказ</title>
+<title>Ирен — AI-разработка под заказ · боты, сайты, автоматизация</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d1117; --panel: #161b22; --border: #30363d; --text: #e6edf3;
-    --muted: #8b949e; --accent: #58a6ff; --green: #3fb950; --gold: #d29922;
+    --bg: #0a0e1a; --bg2: #0d1220; --panel: #10162a; --panel2: #0c1122;
+    --border: #1e2a45; --border-hi: rgba(0,191,255,.5);
+    --text: #e6edf3; --muted: #8b96b0;
+    --blue: #00bfff; --blue2: #1e90ff;
+    --gold: #ffd700; --gold2: #ffaa00;
+    --glow-blue: 0 0 22px rgba(0,191,255,.28);
+    --glow-gold: 0 0 18px rgba(255,215,0,.22);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: var(--bg); color: var(--text);
-    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6; padding-bottom: 60px;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(30,144,255,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(0,191,255,.08), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65; padding-bottom: 70px; overflow-x: hidden;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
-  header { padding: 70px 0 40px; text-align: center; }
-  header h1 { font-size: 2.4em; margin-bottom: 12px; }
-  header h1 span { color: var(--accent); }
-  header p { color: var(--muted); font-size: 1.15em; max-width: 620px; margin: 0 auto; }
-  .badge { display: inline-block; background: rgba(63,185,80,.15); color: var(--green);
-    border: 1px solid rgba(63,185,80,.4); border-radius: 20px; padding: 4px 14px;
-    font-size: .85em; margin-top: 16px; }
-  .note { background: rgba(210,153,34,.12); border: 1px solid rgba(210,153,34,.45);
-    border-radius: 10px; padding: 14px 18px; color: var(--gold); font-weight: 600; margin: 0 0 22px; }
-  section { margin: 50px 0; }
-  h2 { font-size: 1.6em; margin-bottom: 22px; }
-  h2 small { color: var(--muted); font-weight: normal; font-size: .6em; margin-left: 8px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
-  .card h3 { font-size: 1.05em; margin-bottom: 6px; }
-  .card .price { color: var(--gold); font-weight: 700; font-size: 1.1em; margin: 8px 0; }
-  .card p { color: var(--muted); font-size: .92em; }
-  table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 22px; }
+  h1, h2, h3, .font-tech { font-family: "Orbitron", "Inter", sans-serif; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: none; text-shadow: 0 0 12px rgba(0,191,255,.6); }
+
+  /* ---------- header / hero ---------- */
+  header { padding: 66px 0 34px; text-align: center; }
+  .avatar { position: relative; width: 200px; height: 200px; margin: 0 auto 26px; }
+  .avatar img {
+    width: 200px; height: 200px; object-fit: cover; border-radius: 50%;
+    border: 2px solid var(--border-hi);
+    box-shadow: 0 0 30px rgba(0,191,255,.35), 0 0 70px rgba(0,191,255,.15);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .avatar::after {
+    content: ""; position: absolute; inset: -12px; border-radius: 50%;
+    border: 1px solid rgba(0,191,255,.25);
+    animation: ring 4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 26px rgba(0,191,255,.30), 0 0 60px rgba(0,191,255,.14);} 50% { box-shadow: 0 0 44px rgba(0,191,255,.50), 0 0 96px rgba(0,191,255,.22);} }
+  @keyframes ring { 0%,100% { transform: scale(1); opacity:.5; } 50% { transform: scale(1.08); opacity:1; } }
+
+  header h1 { font-size: 2.5em; letter-spacing: 1px; margin-bottom: 10px; }
+  header h1 span { background: linear-gradient(90deg, var(--blue), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  header p.sub { color: var(--muted); font-size: 1.12em; max-width: 640px; margin: 0 auto; }
+  .badge { display: inline-block; background: rgba(0,191,255,.12); color: var(--blue);
+    border: 1px solid var(--border-hi); border-radius: 20px; padding: 5px 16px;
+    font-size: .86em; margin-top: 18px; box-shadow: var(--glow-blue); }
+
+  /* ---------- sections ---------- */
+  section { margin: 56px 0; }
+  h2 { font-size: 1.5em; margin-bottom: 8px; letter-spacing: .5px; }
+  h2 small { color: var(--muted); font-weight: 400; font-size: .62em; margin-left: 10px; letter-spacing: 0; }
+  .lead { color: var(--muted); margin-bottom: 22px; }
+
+  .note { background: rgba(255,215,0,.09); border: 1px solid rgba(255,215,0,.4);
+    border-radius: 10px; padding: 15px 20px; color: var(--gold); font-weight: 600;
+    margin: 0 0 24px; box-shadow: var(--glow-gold); }
+
+  /* ---------- services grid ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+    position: relative; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .card:hover { transform: translateY(-3px); border-color: var(--border-hi); box-shadow: var(--glow-blue); }
+  .card .ico { font-size: 1.7em; margin-bottom: 8px; filter: drop-shadow(0 0 6px rgba(0,191,255,.5)); }
+  .card h3 { font-size: 1.02em; margin-bottom: 6px; }
+  .card .price { color: var(--gold); font-weight: 700; font-size: 1.12em; margin: 9px 0;
+    text-shadow: 0 0 12px rgba(255,215,0,.45); }
+  .card p { color: var(--muted); font-size: .9em; }
+
+  /* ---------- examples of work ---------- */
+  .work { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .work .shot { background: var(--panel2); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; transition: border-color .18s ease, box-shadow .18s ease; }
+  .work .shot:hover { border-color: var(--border-hi); box-shadow: var(--glow-blue); }
+  .shot .cap { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: .85em; }
+  .shot .cap b { color: var(--text); font-family: "Orbitron", sans-serif; letter-spacing: .5px; }
+  .shot .body { padding: 16px; }
+  .shot img { width: 100%; border-radius: 8px; }
+
+  /* chat mockup */
+  .chat { background: #0c1122; border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: .86em; }
+  .chat .m { margin: 8px 0; max-width: 85%; padding: 8px 12px; border-radius: 12px; }
+  .chat .m.user { background: rgba(30,144,255,.18); border: 1px solid var(--border-hi); margin-left: auto; text-align: right; color: var(--text); }
+  .chat .m.bot { background: var(--panel); border: 1px solid var(--border); }
+  .chat .m.bot .tag { color: var(--blue); font-weight: 600; }
+  .chat .voice { display: flex; align-items: center; gap: 8px; color: var(--gold); }
+  .chat .bars { display: flex; gap: 3px; align-items: flex-end; height: 16px; }
+  .chat .bars i { width: 3px; background: var(--gold); border-radius: 2px; animation: eq 1s ease-in-out infinite; }
+  .chat .bars i:nth-child(2){ height: 80%; animation-delay:.1s; } .chat .bars i:nth-child(3){ height: 60%; animation-delay:.2s; }
+  .chat .bars i:nth-child(4){ height: 95%; animation-delay:.3s; } .chat .bars i:nth-child(5){ height: 70%; animation-delay:.4s; }
+  .chat .bars i:nth-child(1){ height: 50%; } .chat .bars i:nth-child(6){ height: 45%; animation-delay:.5s; }
+  @keyframes eq { 0%,100% { transform: scaleY(.5);} 50% { transform: scaleY(1.2);} }
+
+  /* terminal mockup */
+  .term { background: #070b16; border: 1px solid var(--border); border-radius: 10px; padding: 14px;
+    font-family: "Consolas", "Menlo", monospace; font-size: .82em; line-height: 1.7; overflow-x: auto; }
+  .term .bar { color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 10px; }
+  .term .bar i { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; }
+  .term .bar i:nth-child(1){ background:#ff5f56; } .term .bar i:nth-child(2){ background:#ffbd2e; } .term .bar i:nth-child(3){ background:#27c93f; }
+  .term .cmd { color: var(--blue); }
+  .term .ok { color: #3fb950; }
+  .term .hl { color: var(--gold); }
+
+  /* forks */
+  .forks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+  .fork { border: 1px solid var(--border); border-radius: 20px; padding: 7px 15px; font-size: .86em; color: var(--text);
+    transition: all .16s ease; }
+  .fork:hover { border-color: var(--border-hi); color: var(--blue); box-shadow: var(--glow-blue); }
+
+  /* table */
+  table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); }
-  th { color: var(--muted); font-weight: 600; font-size: .85em; text-transform: uppercase; }
+  th { color: var(--muted); font-weight: 600; font-size: .82em; text-transform: uppercase; letter-spacing: .5px; }
   tr:last-child td { border-bottom: none; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  td b { color: var(--gold); text-shadow: 0 0 10px rgba(255,215,0,.4); }
+
+  /* steps */
   .steps { counter-reset: s; }
   .step { display: flex; gap: 16px; margin-bottom: 18px; }
-  .step .n { counter-increment: s; width: 32px; height: 32px; flex: 0 0 32px; border-radius: 50%;
-    background: var(--accent); color: #0d1117; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-  .step h3 { margin-bottom: 4px; }
+  .step .n { counter-increment: s; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--blue2)); color: #06101f; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; font-family: "Orbitron", sans-serif;
+    box-shadow: var(--glow-blue); }
+  .step h3 { margin-bottom: 4px; font-size: 1em; }
   .step p { color: var(--muted); }
+
+  /* contact */
   .contact { text-align: center; }
-  .btn { display: inline-block; background: var(--accent); color: #0d1117; font-weight: 700;
-    padding: 12px 28px; border-radius: 8px; margin: 6px; }
-  .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  .btn { display: inline-block; background: linear-gradient(135deg, var(--blue), var(--blue2)); color: #06101f;
+    font-weight: 700; padding: 13px 30px; border-radius: 9px; margin: 6px; font-family: "Orbitron", sans-serif;
+    letter-spacing: .5px; box-shadow: var(--glow-blue); transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,191,255,.5); }
+  .btn.ghost { background: transparent; color: var(--gold); border: 1px solid rgba(255,215,0,.5); box-shadow: var(--glow-gold); }
+  .btn.ghost:hover { box-shadow: 0 0 26px rgba(255,215,0,.4); }
+
   footer { margin-top: 60px; text-align: center; color: var(--muted); font-size: .85em; }
+  footer .dot { color: var(--blue); text-shadow: 0 0 8px rgba(0,191,255,.8); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <h1>Liberti <span>— разработка под заказ</span></h1>
-    <p>Боты, сайты, парсеры и AI-автоматизация. Быстро, с тестами и инструкцией. Перед оплатой — бесплатный мини-пример по вашей задаче.</p>
+    <div class="avatar"><img src="iren.png" alt="Ирен — ИИ-разработчик"></div>
+    <h1>ИРЕН <span>· AI-разработка под заказ</span></h1>
+    <p class="sub">Боты, сайты, парсеры и AI-автоматизация. Быстро, с тестами и инструкцией. Перед оплатой — бесплатный мини-пример по вашей задаче.</p>
     <div class="badge">Сначала демо → потом оплата</div>
   </header>
 
@@ -65,13 +161,57 @@
     <h2>Услуги и цены <small>грн</small></h2>
     <div class="note">Первым 5 клиентам — цена ниже рынка, в обмен на отзыв и разрешение показать работу в портфолио.</div>
     <div class="grid">
-      <div class="card"><h3>Сайт / лендинг / визитка</h3><div class="price">от 500–600</div><p>Адаптив, формы, базовое SEO, инструкция по хостингу.</p></div>
-      <div class="card"><h3>Telegram-бот</h3><div class="price">от 500–650</div><p>Заявки, уведомления, рассылки, алерты, кнопки.</p></div>
-      <div class="card"><h3>AI-автоматизация</h3><div class="price">от 700–1000</div><p>Чат-бот с ИИ, парсинг, авто-отчёты по расписанию.</p></div>
-      <div class="card"><h3>AI-дизайн</h3><div class="price">от 500</div><p>Логотип, аватар, обложка — генерация и доработка.</p></div>
-      <div class="card"><h3>AI-контент</h3><div class="price">от 500</div><p>Тексты, посты, описания под задачу.</p></div>
-      <div class="card"><h3>Обработка видео</h3><div class="price">от 700</div><p>Монтаж, субтитры, нарезка под Shorts/Reels.</p></div>
-      <div class="card"><h3>Настройка AI-решений</h3><div class="price">от 700</div><p>Подключить и настроить готовый AI-инструмент.</p></div>
+      <div class="card"><div class="ico">🌐</div><h3>Сайт / лендинг / визитка</h3><div class="price">от 500–600</div><p>Адаптив, формы, базовое SEO, инструкция по хостингу.</p></div>
+      <div class="card"><div class="ico">🤖</div><h3>Telegram-бот</h3><div class="price">от 500–650</div><p>Заявки, уведомления, рассылки, алерты, кнопки.</p></div>
+      <div class="card"><div class="ico">⚡</div><h3>AI-автоматизация</h3><div class="price">от 700–1000</div><p>Чат-бот с ИИ, парсинг, авто-отчёты по расписанию.</p></div>
+      <div class="card"><div class="ico">🎨</div><h3>AI-дизайн</h3><div class="price">от 500</div><p>Логотип, аватар, обложка — генерация и доработка.</p></div>
+      <div class="card"><div class="ico">✍️</div><h3>AI-контент</h3><div class="price">от 500</div><p>Тексты, посты, описания под задачу.</p></div>
+      <div class="card"><div class="ico">🎬</div><h3>Обработка видео</h3><div class="price">от 700</div><p>Монтаж, субтитры, нарезка под Shorts/Reels.</p></div>
+      <div class="card"><div class="ico">🔧</div><h3>Настройка AI-решений</h3><div class="price">от 700</div><p>Подключить и настроить готовый AI-инструмент.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Примеры работ <small>живые демо</small></h2>
+    <p class="lead">Что я уже собрал и могу сделать под ваш заказ.</p>
+    <div class="work">
+      <div class="shot">
+        <div class="cap"><b>Ирен</b> — лицо проекта</div>
+        <div class="body"><img src="iren.png" alt="Ирен"></div>
+      </div>
+      <div class="shot">
+        <div class="cap"><b>Telegram-бот</b> — приём заявок и команды</div>
+        <div class="body">
+          <div class="chat">
+            <div class="m user">/demo</div>
+            <div class="m bot"><span class="tag">Ирен:</span> Привет, я Ирен — AI-ассистент. Смотри мою витрину 👇</div>
+            <div class="m bot voice"><span class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></span> голос · 0:04</div>
+            <div class="m bot">🌐 ant19801108.github.io/showcase</div>
+          </div>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="cap"><b>Парсер данных</b> — цены → CSV/JSON</div>
+        <div class="body">
+          <div class="term">
+            <div class="bar"><i></i><i></i><i></i> price_scraper</div>
+            <div><span class="cmd">$</span> python price_scraper.py --site example.com</div>
+            <div>[1/3] сканирую каталог…</div>
+            <div>[2/3] товаров собрано: <span class="hl">128</span></div>
+            <div>[3/3] запись в CSV…</div>
+            <div class="ok">✅ Готово: prices.csv</div>
+            <div style="margin-top:6px;color:var(--muted)">product, price<br>«Товар A», <span class="hl">499</span><br>«Товар B», <span class="hl">1299</span> …</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="forks">
+      <a class="fork" href="https://github.com/Ant19801108/telegram-shop-bot">telegram-shop-bot</a>
+      <a class="fork" href="https://github.com/Ant19801108/price-scraper">price-scraper</a>
+      <a class="fork" href="https://github.com/Ant19801108/flask-crud-web">flask-crud-web</a>
+      <a class="fork" href="https://github.com/Ant19801108/url-to-pdf-api">url-to-pdf-api</a>
+      <a class="fork" href="https://github.com/Ant19801108/Scraperr">Scraperr</a>
+      <a class="fork" href="https://github.com/Ant19801108/openscreen">openscreen</a>
     </div>
   </section>
 
@@ -79,20 +219,13 @@
     <h2>Готовые решения <small>разверну и настрою</small></h2>
     <table>
       <tr><th>Решение</th><th>Что делает</th><th>Развёртывание</th></tr>
-      <tr><td>PayAPI</td><td>Скриншоты и PDF за крипту (self-serve API)</td><td>от $10</td></tr>
-      <tr><td>url-to-pdf-api</td><td>Сайты → PDF + скриншоты</td><td>от $10</td></tr>
-      <tr><td>Scraperr</td><td>Веб-скрейпер (XPath, очередь задач)</td><td>от $10</td></tr>
-      <tr><td>Pckd</td><td>Сокращатель ссылок с аналитикой</td><td>от $10</td></tr>
-      <tr><td>Palmr</td><td>Файлообменник (WeTransfer-аналог)</td><td>от $10</td></tr>
-      <tr><td>davia</td><td>Интерактивные доки для coding-агентов</td><td>от $10</td></tr>
+      <tr><td>PayAPI</td><td>Скриншоты и PDF за крипту (self-serve API)</td><td><b>от $10</b></td></tr>
+      <tr><td>url-to-pdf-api</td><td>Сайты → PDF + скриншоты</td><td><b>от $10</b></td></tr>
+      <tr><td>Scraperr</td><td>Веб-скрейпер (XPath, очередь задач)</td><td><b>от $10</b></td></tr>
+      <tr><td>Pckd</td><td>Сокращатель ссылок с аналитикой</td><td><b>от $10</b></td></tr>
+      <tr><td>Palmr</td><td>Файлообменник (WeTransfer-аналог)</td><td><b>от $10</b></td></tr>
+      <tr><td>davia</td><td>Интерактивные доки для coding-агентов</td><td><b>от $10</b></td></tr>
     </table>
-  </section>
-
-  <section>
-    <h2>Портфолио</h2>
-    <p>GitHub: <a href="https://github.com/Ant19801108">github.com/Ant19801108</a></p>
-    <p>Демо: telegram-shop-bot · price-scraper · flask-crud-web<br>
-    Форки (maintained): url-to-pdf-api · Scraperr · openscreen</p>
   </section>
 
   <section>
@@ -106,11 +239,11 @@
 
   <section class="contact">
     <h2>Связаться</h2>
-    <a class="btn" href="https://t.me/medbot1_bot">Telegram: @medbot1_bot</a>
+    <a class="btn" href="https://t.me/IreneTestBot_123_bot">Telegram: @IreneTestBot_123_bot</a>
     <a class="btn ghost" href="https://github.com/Ant19801108">GitHub</a>
   </section>
 
-  <footer>Liberti · быстрая разработка под заказ · демо до оплаты</footer>
+  <footer>Ирен · быстрая разработка под заказ · <span class="dot">▮</span> демо до оплаты</footer>
 </div>
 </body>
 </html>
