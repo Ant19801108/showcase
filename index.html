@@ -1,320 +1,596 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ирен — AI-разработка под заказ · боты, сайты, автоматизация</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Портфолио · LibertiAnt — обзор всего сайта</title>
+<meta property="og:title" content="Портфолио LibertiAnt — боты, парсеры, автоматизация, безопасность">
+<meta property="og:description" content="Полный обзор: что мы делаем, живые примеры, готовые проекты, игра, AI-OS. Всё на одном экране.">
+<meta property="og:image" content="https://antiren.pp.ua/og-preview.png">
+<meta property="og:type" content="website">
 <style>
-  :root {
-    --bg: #0a0e1a; --bg2: #0d1220; --panel: #10162a; --panel2: #0c1122;
-    --border: #1e2a45; --border-hi: rgba(0,191,255,.5);
-    --text: #e6edf3; --muted: #8b96b0;
-    --blue: #00bfff; --blue2: #1e90ff;
-    --gold: #ffd700; --gold2: #ffaa00;
-    --glow-blue: 0 0 22px rgba(0,191,255,.28);
-    --glow-gold: 0 0 18px rgba(255,215,0,.22);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.65; padding-bottom: 70px; overflow-x: hidden;
-  }
-  /* фоновые слои: цифровой дождь + нейросеть */
-  canvas.layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-  #net { z-index: 0; opacity: .9; }
-  #rain { z-index: 0; opacity: .55; }
-  .wrap { position: relative; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 22px; }
-  h1, h2, h3, .font-tech { font-family: "Orbitron", "Inter", sans-serif; }
-  a { color: var(--blue); text-decoration: none; }
-  a:hover { text-shadow: 0 0 12px rgba(0,191,255,.6); }
+:root{
+  --bg:#0b1020;--bg2:#0e1428;--card:#141c34;--card2:#0f1730;
+  --fg:#eef3ff;--mut:#9db0d0;--acc:#38d39f;--ac2:#4da3ff;--gold:#ffd54a;--line:#22315c;
+  --glow:0 0 30px rgba(77,163,255,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#0b1020,#0a0e1c 60%);
+  color:var(--fg);font:20px/1.75 -apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:0 18px}
+.wrap{max-width:1180px;margin:0 auto;padding:44px 0 90px}
 
-  /* ---------- header / hero ---------- */
-  header { padding: 60px 0 34px; text-align: center; }
-  .avatar { position: relative; width: 210px; height: 210px; margin: 0 auto 26px; }
-  .avatar img {
-    width: 210px; height: 210px; object-fit: cover; border-radius: 50%;
-    border: 2px solid var(--border-hi);
-    box-shadow: 0 0 34px rgba(0,191,255,.40), 0 0 90px rgba(0,191,255,.18);
-    animation: pulse 4s ease-in-out infinite;
-  }
-  .avatar::before, .avatar::after {
-    content: ""; position: absolute; border-radius: 50%;
-    border: 1px solid rgba(0,191,255,.28);
-    animation: ring 4s ease-in-out infinite;
-  }
-  .avatar::before { inset: -8px; }
-  .avatar::after { inset: -18px; border-color: rgba(255,215,0,.20); animation-delay: .5s; }
-  @keyframes pulse { 0%,100% { box-shadow: 0 0 30px rgba(0,191,255,.32), 0 0 70px rgba(0,191,255,.15);} 50% { box-shadow: 0 0 52px rgba(0,191,255,.55), 0 0 120px rgba(0,191,255,.24);} }
-  @keyframes ring { 0%,100% { transform: scale(1); opacity:.4; } 50% { transform: scale(1.07); opacity:1; } }
+/* ===== HERO ===== */
+.hero{display:flex;gap:34px;align-items:center;flex-wrap:wrap;
+  background:linear-gradient(135deg,#101a38 0%,#141c34 55%,#0d1428 100%);
+  border:1px solid var(--line);border-radius:22px;padding:38px 40px;margin-bottom:26px;
+  box-shadow:var(--glow);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-120px;right:-120px;width:320px;height:320px;
+  background:radial-gradient(circle,rgba(77,163,255,.22),transparent 65%);pointer-events:none}
+.hero .txt{flex:1;min-width:300px;position:relative;z-index:1}
+.hero img.avatar{width:170px;height:170px;object-fit:cover;border-radius:20px;border:2px solid #4da3ff66;
+  box-shadow:0 0 46px #4da3ff55}
+h1{font-size:3rem;margin:0 0 10px;line-height:1.12;
+  background:linear-gradient(135deg,#4da3ff,#38d39f);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+.sub{color:var(--mut);margin:0 0 16px;font-size:1.22rem}
+.badge{display:inline-block;background:#1f6feb22;color:var(--ac2);border:1px solid #1f6feb66;
+  border-radius:22px;padding:6px 18px;font-size:1rem;margin:0 8px 8px 0;font-weight:600}
 
-  header h1 { font-size: 2.6em; letter-spacing: 2px; margin-bottom: 10px; }
-  header h1 span { background: linear-gradient(90deg, var(--blue), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  header p.sub { color: var(--muted); font-size: 1.12em; max-width: 640px; margin: 0 auto; }
-  .badge { display: inline-block; background: rgba(0,191,255,.12); color: var(--blue);
-    border: 1px solid var(--border-hi); border-radius: 20px; padding: 5px 16px;
-    font-size: .86em; margin-top: 18px; box-shadow: var(--glow-blue); }
+/* ===== КАРТОЧКИ ===== */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px 36px;margin:22px 0}
+.card h2{margin:0 0 8px;font-size:2rem;letter-spacing:.2px}
+.card h2 .em{color:var(--gold)}
+.meta{color:var(--mut);font-size:1.06rem;margin:0 0 18px}
+b.pr{color:var(--gold);white-space:nowrap}
+ul{margin:12px 0 0;padding-left:26px}
+li{margin:8px 0;font-size:1.08rem}
+a{color:var(--ac2);text-decoration:none;font-weight:600}
+a:hover{text-decoration:underline}
+.ok{color:var(--acc);font-weight:700}
+b{color:#fff}
+code{background:#0a1024;border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:.92em}
 
-  /* ---------- sections ---------- */
-  section { margin: 56px 0; }
-  h2 { font-size: 1.5em; margin-bottom: 8px; letter-spacing: .5px; }
-  h2 small { color: var(--muted); font-weight: 400; font-size: .62em; margin-left: 10px; letter-spacing: 0; }
-  .lead { color: var(--muted); margin-bottom: 22px; }
+/* ===== СЕТКА РАЗДЕЛОВ САЙТА ===== */
+.sites{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:22px}
+.site{background:var(--card2);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .18s,border-color .18s,box-shadow .18s}
+.site:hover{transform:translateY(-5px);border-color:#4da3ff;box-shadow:var(--glow)}
+.site .thumb{width:100%;height:180px;object-fit:contain;object-position:center;background:#0a1024;display:block;padding:6px}
+.site .body{padding:20px 22px;flex:1;display:flex;flex-direction:column}
+.site .tagline{font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+.site h3{margin:0 0 8px;font-size:1.35rem}
+.site p{margin:0 0 14px;color:var(--mut);font-size:1.02rem;flex:1}
+.site .go a{font-size:1.05rem}
 
-  .note { background: rgba(255,215,0,.09); border: 1px solid rgba(255,215,0,.4);
-    border-radius: 10px; padding: 15px 20px; color: var(--gold); font-weight: 600;
-    margin: 0 0 24px; box-shadow: var(--glow-gold); }
+/* ===== ГАЛЕРЕЯ РАБОТ ===== */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px;margin-top:22px}
+.g{background:var(--card2);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .18s,border-color .18s,box-shadow .18s}
+.g:hover{transform:translateY(-5px);border-color:#38d39f;box-shadow:0 0 30px rgba(56,211,159,.22)}
+.g img{width:100%;height:190px;object-fit:contain;object-position:center;background:#0a1024;padding:8px}
+.g .body{padding:20px 22px;flex:1;display:flex;flex-direction:column}
+.g h3{margin:0 0 8px;font-size:1.28rem}
+.g p{margin:0 0 14px;color:var(--mut);font-size:1.02rem;flex:1}
+.g .go a{font-size:1.05rem}
 
-  /* ---------- services grid ---------- */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 16px; }
-  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
-    position: relative; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-  .card:hover { transform: translateY(-4px); border-color: var(--border-hi); box-shadow: var(--glow-blue); }
-  .card .ico { font-size: 1.7em; margin-bottom: 8px; filter: drop-shadow(0 0 6px rgba(0,191,255,.5)); }
-  .card h3 { font-size: 1.02em; margin-bottom: 6px; }
-  .card .price { color: var(--gold); font-weight: 700; font-size: 1.12em; margin: 9px 0;
-    text-shadow: 0 0 12px rgba(255,215,0,.45); }
-  .card p { color: var(--muted); font-size: .9em; }
+/* ===== БОТЫ (картинки) ===== */
+.bots{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:24px;margin-top:22px}
+.bot{background:linear-gradient(160deg,#141c34,#0d1428);border:1px solid var(--line);
+  border-radius:18px;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
+.bot:hover{transform:translateY(-5px);border-color:#ffd54a;box-shadow:0 0 34px rgba(255,213,74,.20)}
+.bot img{width:100%;height:230px;object-fit:contain;object-position:center;display:block;background:#0a1024;padding:10px}
+.bot .body{padding:22px 24px}
+.bot h3{margin:0 0 8px;font-size:1.35rem;color:var(--gold)}
+.bot p{margin:0;color:var(--mut);font-size:1.04rem}
 
-  /* ---------- examples of work ---------- */
-  .work { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-  .work .shot { background: var(--panel2); border: 1px solid var(--border); border-radius: 12px;
-    overflow: hidden; transition: border-color .18s ease, box-shadow .18s ease; }
-  .work .shot:hover { border-color: var(--border-hi); box-shadow: var(--glow-blue); }
-  .shot .cap { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: .85em; }
-  .shot .cap b { color: var(--text); font-family: "Orbitron", sans-serif; letter-spacing: .5px; }
-  .shot .body { padding: 16px; }
-  .shot img { width: 100%; border-radius: 8px; }
+/* ===== ВИДЕО ===== */
+.vidbox{background:#0a1024;border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:16px}
+video{width:100%;border-radius:12px;display:block;background:#000}
+/* ===== НАЗВАНИЕ САЙТА: СИНЕ-ЗОЛОТОЕ НА ЧЁРНОМ ===== */
+.brandsite{padding:22px 10px}
+.bs-title{font-size:clamp(2.2rem,7vw,4.2rem);font-weight:900;letter-spacing:6px;
+  background:linear-gradient(92deg,#38bdf8 0%,#7dd3fc 30%,#ffd966 55%,#f7c948 80%,#38bdf8 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 18px #38bdf877) drop-shadow(0 0 30px #f7c94855)}
+.bs-url{display:inline-block;margin-top:10px;font-size:clamp(1.3rem,4.5vw,2.1rem);font-weight:800;
+  letter-spacing:2px;text-decoration:none;color:#7dd3fc;
+  text-shadow:0 0 14px #38bdf8aa,0 0 26px #38bdf866;transition:.25s}
+.bs-url:hover{color:#ffd966;text-shadow:0 0 16px #f7c948cc,0 0 30px #f7c94888}
+.bs-sub{margin-top:12px;color:#9ab6d8;font-size:.98rem;letter-spacing:1px}
+@media(max-width:760px){.vgrid{grid-template-columns:1fr !important}.bs-title{letter-spacing:3px}}
 
-  .chat { background: #0c1122; border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: .86em; }
-  .chat .m { margin: 8px 0; max-width: 85%; padding: 8px 12px; border-radius: 12px; }
-  .chat .m.user { background: rgba(30,144,255,.18); border: 1px solid var(--border-hi); margin-left: auto; text-align: right; color: var(--text); }
-  .chat .m.bot { background: var(--panel); border: 1px solid var(--border); }
-  .chat .m.bot .tag { color: var(--blue); font-weight: 600; }
-  .chat .voice { display: flex; align-items: center; gap: 8px; color: var(--gold); }
-  .chat .bars { display: flex; gap: 3px; align-items: flex-end; height: 16px; }
-  .chat .bars i { width: 3px; background: var(--gold); border-radius: 2px; animation: eq 1s ease-in-out infinite; }
-  .chat .bars i:nth-child(2){ height: 80%; animation-delay:.1s; } .chat .bars i:nth-child(3){ height: 60%; animation-delay:.2s; }
-  .chat .bars i:nth-child(4){ height: 95%; animation-delay:.3s; } .chat .bars i:nth-child(5){ height: 70%; animation-delay:.4s; }
-  .chat .bars i:nth-child(1){ height: 50%; } .chat .bars i:nth-child(6){ height: 45%; animation-delay:.5s; }
-  @keyframes eq { 0%,100% { transform: scaleY(.5);} 50% { transform: scaleY(1.2);} }
+/* ===== ТАБЛИЦА ===== */
+.tbl{width:100%;border-collapse:collapse;margin-top:14px;font-size:1.06rem}
+.tbl th,.tbl td{border:1px solid var(--line);padding:12px 16px;text-align:left}
+.tbl th{background:#0f1730;color:var(--gold);font-weight:700}
 
-  .term { background: #070b16; border: 1px solid var(--border); border-radius: 10px; padding: 14px;
-    font-family: "Consolas", "Menlo", monospace; font-size: .82em; line-height: 1.7; overflow-x: auto; }
-  .term .bar { color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 10px; }
-  .term .bar i { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; }
-  .term .bar i:nth-child(1){ background:#ff5f56; } .term .bar i:nth-child(2){ background:#ffbd2e; } .term .bar i:nth-child(3){ background:#27c93f; }
-  .term .cmd { color: var(--blue); }
-  .term .ok { color: #3fb950; }
-  .term .hl { color: var(--gold); }
+/* ===== QR / КОНТАКТ ===== */
+.qr{float:right;text-align:center;margin:0 0 12px 22px}
+.qr img{width:130px;height:130px;background:#fff;padding:8px;border-radius:12px;display:block}
+.qr span{font-size:.85rem;color:var(--mut)}
+.foot{color:var(--mut);font-size:1.02rem;margin-top:44px;border-top:1px solid var(--line);padding-top:22px;text-align:center}
 
-  .forks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
-  .fork { border: 1px solid var(--border); border-radius: 20px; padding: 7px 15px; font-size: .86em; color: var(--text);
-    transition: all .16s ease; }
-  .fork:hover { border-color: var(--border-hi); color: var(--blue); box-shadow: var(--glow-blue); }
+/* ===== СЛАЙД-ШОУ ИРЕНЫ (в начале) ===== */
+.slideshow{position:relative;width:100%;max-width:900px;margin:0 auto 8px;border-radius:20px;
+  overflow:hidden;border:1px solid var(--line);background:#0a1024;box-shadow:0 0 50px rgba(77,163,255,.20)}
+.slideshow img{width:100%;display:block;position:absolute;top:0;left:0;opacity:0;
+  transition:opacity 1.4s ease}
+.slideshow img.on{opacity:1;position:relative}
+.slideshow .cap{position:absolute;bottom:0;left:0;right:0;padding:16px 22px;
+  background:linear-gradient(0deg,rgba(6,10,22,.92),transparent);color:#fff;font-size:1.05rem;font-weight:600}
+.dots{text-align:center;margin:12px 0 34px}
+.dots i{display:inline-block;width:11px;height:11px;border-radius:50%;background:#2a3a63;margin:0 5px;transition:background .3s}
+.dots i.on{background:var(--acc)}
+.intro-h{text-align:center;font-size:2.4rem;margin:8px 0 6px}
+.intro-h .em{color:var(--gold)}
+.intro-p{text-align:center;color:var(--mut);font-size:1.15rem;max-width:760px;margin:0 auto 20px}
+.face{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.face img{width:220px;border-radius:18px;border:1px solid #4da3ff55;box-shadow:0 0 40px #4da3ff44}
+.face .t{flex:1;min-width:260px}
 
-  table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); }
-  th { color: var(--muted); font-weight: 600; font-size: .82em; text-transform: uppercase; letter-spacing: .5px; }
-  tr:last-child td { border-bottom: none; }
-  td b { color: var(--gold); text-shadow: 0 0 10px rgba(255,215,0,.4); }
-
-  .steps { counter-reset: s; }
-  .step { display: flex; gap: 16px; margin-bottom: 18px; }
-  .step .n { counter-increment: s; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue), var(--blue2)); color: #06101f; font-weight: 800;
-    display: flex; align-items: center; justify-content: center; font-family: "Orbitron", sans-serif;
-    box-shadow: var(--glow-blue); }
-  .step h3 { margin-bottom: 4px; font-size: 1em; }
-  .step p { color: var(--muted); }
-
-  .contact { text-align: center; }
-  .btn { display: inline-block; background: linear-gradient(135deg, var(--blue), var(--blue2)); color: #06101f;
-    font-weight: 700; padding: 13px 30px; border-radius: 9px; margin: 6px; font-family: "Orbitron", sans-serif;
-    letter-spacing: .5px; box-shadow: var(--glow-blue); transition: transform .15s ease, box-shadow .15s ease; }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,191,255,.5); }
-  .btn.ghost { background: transparent; color: var(--gold); border: 1px solid rgba(255,215,0,.5); box-shadow: var(--glow-gold); }
-  .btn.ghost:hover { box-shadow: 0 0 26px rgba(255,215,0,.4); }
-
-  footer { margin-top: 60px; text-align: center; color: var(--muted); font-size: .85em; }
-  footer .dot { color: var(--blue); text-shadow: 0 0 8px rgba(0,191,255,.8); }
+@media(max-width:900px){h1{font-size:2.2rem}.card{padding:24px 22px}.hero{padding:26px 22px}.qr{float:none;margin:0 auto 16px}.intro-h{font-size:1.9rem}.sites,.gallery,.bots{grid-template-columns:1fr !important;gap:16px}.site .thumb{height:170px}.g img{height:180px}.bot img{height:210px}body{overflow-x:hidden}.card{padding:20px 16px}}
 </style>
 </head>
 <body>
-<canvas id="net" class="layer"></canvas>
-<canvas id="rain" class="layer"></canvas>
 <div class="wrap">
 
-  <header>
-    <div class="avatar"><img src="iren.png" alt="Ирен — ИИ-разработчик"></div>
-    <h1>ИРЕН <span>· AI-разработка под заказ</span></h1>
-    <p class="sub">Боты, сайты, парсеры и AI-автоматизация. Быстро, с тестами и инструкцией. Перед оплатой — бесплатный мини-пример по вашей задаче.</p>
-    <div class="badge">Сначала демо → потом оплата</div>
-  </header>
+  <!-- ===== СЛАЙД-ШОУ ИРЕНЫ (ГЛАВНОЕ В НАЧАЛЕ) ===== -->
+  <h1 class="intro-h">Привет, я <span class="em">Ирена</span></h1>
+  <p class="intro-p">Я — digital-помощник студии <b>«Liberti и Ant»</b>. Мы делаем <b>ботов, парсеры, сайты и автоматизацию</b>. Смотри, что у нас уже готово — листай медленно, всё успеешь рассмотреть.</p>
 
-  <section>
-    <h2>Услуги и цены <small>грн</small></h2>
-    <div class="note">Первым 5 клиентам — цена ниже рынка, в обмен на отзыв и разрешение показать работу в портфолио.</div>
-    <div class="grid">
-      <div class="card"><div class="ico">🌐</div><h3>Сайт / лендинг / визитка</h3><div class="price">от 500–600</div><p>Адаптив, формы, базовое SEO, инструкция по хостингу.</p></div>
-      <div class="card"><div class="ico">🤖</div><h3>Telegram-бот</h3><div class="price">от 500–650</div><p>Заявки, уведомления, рассылки, алерты, кнопки.</p></div>
-      <div class="card"><div class="ico">⚡</div><h3>AI-автоматизация</h3><div class="price">от 700–1000</div><p>Чат-бот с ИИ, парсинг, авто-отчёты по расписанию.</p></div>
-      <div class="card"><div class="ico">🎨</div><h3>AI-дизайн</h3><div class="price">от 500</div><p>Логотип, аватар, обложка — генерация и доработка.</p></div>
-      <div class="card"><div class="ico">✍️</div><h3>AI-контент</h3><div class="price">от 500</div><p>Тексты, посты, описания под задачу.</p></div>
-      <div class="card"><div class="ico">🎬</div><h3>Обработка видео</h3><div class="price">от 700</div><p>Монтаж, субтитры, нарезка под Shorts/Reels.</p></div>
-      <div class="card"><div class="ico">🔧</div><h3>Настройка AI-решений</h3><div class="price">от 700</div><p>Подключить и настроить готовый AI-инструмент.</p></div>
+  <div class="slideshow" id="sl">
+    <img class="on" src="https://antiren.pp.ua/portfolio/shots/banner1_ru.jpg" alt="Что мы делаем — русский">
+    <img src="https://antiren.pp.ua/portfolio/shots/banner3_pl.jpg" alt="Что мы делаем — польский">
+    <img src="https://antiren.pp.ua/portfolio/shots/banner4_en.jpg" alt="Что мы делаем — английский">
+    <img src="https://antiren.pp.ua/portfolio/shots/banner2_ru.jpg" alt="Что мы делаем — услуги">
+    <div class="cap">Боты · Парсеры · Сайты · Автоматизация · Безопасность</div>
+  </div>
+  <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i></div>
+
+  <!-- ===== HERO ===== -->
+  <div class="hero">
+    <img class="avatar" src="https://antiren.pp.ua/ant-architect.webp" alt="LibertiAnt">
+    <div class="txt">
+      <h1>LibertiAnt</h1>
+      <p class="sub">Студия <b>«Liberti и Ant»</b> · боты · парсеры · автоматизация · безопасность</p>
+      <span class="badge">Telegram-боты</span>
+      <span class="badge">Парсеры и сбор данных</span>
+      <span class="badge">Python-автоматизация</span>
+      <span class="badge">Сайты и лендинги</span>
+      <span class="badge">AI-решения</span>
+      <span class="badge">Безопасность (white-hat)</span>
     </div>
-  </section>
+  </div>
 
-  <section>
-    <h2>Примеры работ <small>живые демо</small></h2>
-    <p class="lead">Что я уже собрал и могу сделать под ваш заказ.</p>
-    <div class="work">
-      <div class="shot">
-        <div class="cap"><b>Ирен</b> — лицо проекта</div>
-        <div class="body"><img src="iren.png" alt="Ирен"></div>
-      </div>
-      <div class="shot">
-        <div class="cap"><b>Telegram-бот</b> — приём заявок и команды</div>
+  <!-- ===== ЧТО ЭТО СТРАНИЦА ===== -->
+  <div class="card">
+    <h2>Это <span class="em">обзор всего сайта</span> — в одном месте</h2>
+    <p class="meta">Здесь собрано всё, что у нас есть: от готовых ботов и парсеров до игры, AI-платформы и живых демо. Ничего не пропущено. Кликните на любую карточку — откроется живой раздел.</p>
+    <ul>
+      <li><b>Боты</b> — приём заказов, уведомления, рассылки, AI-ассистенты</li>
+      <li><b>Парсеры</b> — цены, товары, контакты, каталоги → CSV/Excel/JSON</li>
+      <li><b>Автоматизация</b> — скрипты, API-интеграции, отчёты по расписанию</li>
+      <li><b>Сайты</b> — лендинги, визитки, витрины под заказ</li>
+      <li><b>Готовые решения</b> — проекты, которые можно забрать и запустить</li>
+      <li><b>Игра и AI-платформа</b> — то, что показывает наш уровень</li>
+    </ul>
+  </div>
+
+  <!-- ===== ОБЗОР ВСЕГО САЙТА ===== -->
+  <div class="card">
+    <h2>Карта сайта — <span class="em">все разделы</span></h2>
+    <p class="meta">Каждый раздел — рабочая страница. Нажмите, чтобы посмотреть.</p>
+
+    <div class="sites">
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/ant-hero.webp" alt="Главная">
         <div class="body">
-          <div class="chat">
-            <div class="m user">/demo</div>
-            <div class="m bot"><span class="tag">Ирен:</span> Привет, я Ирен — AI-ассистент. Смотри мою витрину 👇</div>
-            <div class="m bot voice"><span class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></span> голос · 0:04</div>
-            <div class="m bot">🌐 ant19801108.github.io/showcase</div>
-          </div>
+          <div class="tagline">Раздел 1</div>
+          <h3>Главная — портал</h3>
+          <p>Точка входа на сайт: знакомство, выбор персонажа (Ант / Ирен), вход в игру MCMA и тех-анализ.</p>
+          <div class="go"><a href="https://antiren.pp.ua/">Открыть главную →</a></div>
         </div>
       </div>
-      <div class="shot">
-        <div class="cap"><b>Парсер данных</b> — цены → CSV/JSON</div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/showcase/iren.png" alt="Витрина">
         <div class="body">
-          <div class="term">
-            <div class="bar"><i></i><i></i><i></i> price_scraper</div>
-            <div><span class="cmd">$</span> python price_scraper.py --site example.com</div>
-            <div>[1/3] сканирую каталог…</div>
-            <div>[2/3] товаров собрано: <span class="hl">128</span></div>
-            <div>[3/3] запись в CSV…</div>
-            <div class="ok">✅ Готово: prices.csv</div>
-            <div style="margin-top:6px;color:var(--muted)">product, price<br>«Товар A», <span class="hl">499</span><br>«Товар B», <span class="hl">1299</span> …</div>
-          </div>
+          <div class="tagline">Раздел 2</div>
+          <h3>Витрина «Ирен» — услуги и цены</h3>
+          <p>Все услуги с ценами: боты, сайты, AI-дизайн, контент, видео. Примеры работ и живой бот магазина.</p>
+          <div class="go"><a href="https://antiren.pp.ua/showcase/">Открыть витрину →</a></div>
+        </div>
+      </div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/demo/preview_parser.png" alt="Демо">
+        <div class="body">
+          <div class="tagline">Раздел 3</div>
+          <h3>Демо-хаб — 11 готовых проектов</h3>
+          <p>Склад рабочих проектов: магазин-бот, парсеры, монитор, трекеры. Каждый можно скачать и запустить.</p>
+          <div class="go"><a href="https://antiren.pp.ua/demo/">Открыть демо →</a></div>
+        </div>
+      </div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/og-preview.png" alt="Монитор селлера">
+        <div class="body">
+          <div class="tagline">Раздел 4</div>
+          <h3>Монитор селлера</h3>
+          <p>Инструмент для продавцов: отслеживание цен, конкурентов, позиций. Автоматический мониторинг.</p>
+          <div class="go"><a href="https://antiren.pp.ua/seller/ru/">Открыть монитор →</a></div>
+        </div>
+      </div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/ant-guardian.webp" alt="LIBERTI AI OS">
+        <div class="body">
+          <div class="tagline">Раздел 5</div>
+          <h3>LIBERTI AI OS — наш продукт</h3>
+          <p>Операционная система для ИИ-агентов: локальная, без привязки к одному мозгу. Наш главный флагман.</p>
+          <div class="go"><a href="https://antiren.pp.ua/product/">Открыть продукт →</a></div>
+        </div>
+      </div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/ant-door.webp" alt="Игра">
+        <div class="body">
+          <div class="tagline">Раздел 6</div>
+          <h3>Игра MCMA</h3>
+          <p>Карточная игра с логикой и стратегией. Живой пример того, что мы умеем делать сложные системы.</p>
+          <div class="go"><a href="https://antiren.pp.ua/game.html">Играть →</a></div>
+        </div>
+      </div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/who_ant_photo.jpg" alt="Ант">
+        <div class="body">
+          <div class="tagline">Раздел 7</div>
+          <h3>Ант — о проекте</h3>
+          <p>Кто мы такие, чем занимаемся, наш подход к работе. Знакомство с командой «Liberti и Ant».</p>
+          <div class="go"><a href="https://antiren.pp.ua/ant.html">Открыть →</a></div>
+        </div>
+      </div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/who_iren_photo.webp" alt="Ирен">
+        <div class="body">
+          <div class="tagline">Раздел 8</div>
+          <h3>Ирен — AI-ассистент</h3>
+          <p>Наш AI-ассистент: общение, помощь, демонстрация возможностей. Лицо проекта.</p>
+          <div class="go"><a href="https://antiren.pp.ua/irena.html">Открыть →</a></div>
+        </div>
+      </div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/assets/bots/android_final.jpg" alt="Заказы">
+        <div class="body">
+          <div class="tagline">Раздел 9</div>
+          <h3>Заказы и клиенты</h3>
+          <p>Форма для заказов и кабинет клиента: опишите задачу — мы ответим и предложим решение.</p>
+          <div class="go"><a href="https://antiren.pp.ua/orders.html">Оставить заказ →</a></div>
+        </div>
+      </div>
+
+      <div class="site">
+        <img class="thumb" src="https://antiren.pp.ua/ant-irena.webp" alt="Мистик">
+        <div class="body">
+          <div class="tagline">Раздел 10</div>
+          <h3>Мистик — арт-раздел</h3>
+          <p>Демонстрация художественных возможностей: визуал, атмосфера, генерация оформления.</p>
+          <div class="go"><a href="https://antiren.pp.ua/portfolio/mystic/">Открыть →</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== БОТЫ (с картинками) ===== -->
+  <div class="card">
+    <h2>Наши боты — <span class="em">кто что делает</span></h2>
+    <p class="meta">Это не картинки из интернета — это мы такие собираем и запускаем. Разные боты под разные задачи.</p>
+
+    <div class="bots">
+      <div class="bot">
+        <img src="https://antiren.pp.ua/assets/bots/android_final.jpg" alt="Бот приёма заказов">
+        <div class="body">
+          <h3>🤖 Бот приёма заказов</h3>
+          <p>Клиент пишет боту → выбирает товар кнопками → оставляет телефон. Заказ <b>сам падает в таблицу</b>. Работает 24/7, помнит клиента, отвечает на языке клиента.</p>
+        </div>
+      </div>
+
+      <div class="bot">
+        <img src="https://antiren.pp.ua/assets/bots/android_v2.jpg" alt="AI-ассистент">
+        <div class="body">
+          <h3>🧠 AI-ассистент</h3>
+          <p>Чат-бот с настоящим ИИ: понимает текст, отвечает голосом, разбирает картинки и файлы. Подходит для поддержки, продаж, консультаций.</p>
+        </div>
+      </div>
+
+      <div class="bot">
+        <img src="https://antiren.pp.ua/assets/bots/android_snow.jpg" alt="Бот-парсер">
+        <div class="body">
+          <h3>🔎 Бот-парсер</h3>
+          <p>Присылаете ссылку — бот собирает цены, товары, контакты и отдаёт готовым CSV/Excel/JSON. Парсит каталоги, маркетплейсы, сайты конкурентов.</p>
+        </div>
+      </div>
+
+      <div class="bot">
+        <img src="https://antiren.pp.ua/assets/bots/android_final.jpg" alt="Бот-уведомитель">
+        <div class="body">
+          <h3>🔔 Бот-уведомитель</h3>
+          <p>Следит за ценой, наличием, изменениями на сайте — и сразу пишет вам в Telegram. Идеален для мониторинга товаров и ставок.</p>
+        </div>
+      </div>
+
+      <div class="bot">
+        <img src="https://antiren.pp.ua/assets/bots/android_v2.jpg" alt="Бот-рассыльщик">
+        <div class="body">
+          <h3>📢 Бот-рассыльщик</h3>
+          <p>Рассылки по базе клиентов, авто-отчёты по расписанию, напоминания. Без спама — по правилам и с защитой от бана.</p>
+        </div>
+      </div>
+
+      <div class="bot">
+        <img src="https://antiren.pp.ua/assets/bots/android_snow.jpg" alt="Бот-автоматизация">
+        <div class="body">
+          <h3>⚡ Бот-автоматизация</h3>
+          <p>Связка бота с вашими сервисами: таблицы, CRM, API, оплата. Делает рутину сам — от приёма заявки до отчёта.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section>
-    <h2>Готовые решения <small>разверну и настрою</small></h2>
-    <table>
-      <tr><th>Решение</th><th>Что делает</th><th>Развёртывание</th></tr>
-      <tr><td>PayAPI</td><td>Скриншоты и PDF за крипту (self-serve API)</td><td><b>от $10</b></td></tr>
-      <tr><td>url-to-pdf-api</td><td>Сайты → PDF + скриншоты</td><td><b>от $10</b></td></tr>
-      <tr><td>Scraperr</td><td>Веб-скрейпер (XPath, очередь задач)</td><td><b>от $10</b></td></tr>
-      <tr><td>Pckd</td><td>Сокращатель ссылок с аналитикой</td><td><b>от $10</b></td></tr>
-      <tr><td>Palmr</td><td>Файлообменник (WeTransfer-аналог)</td><td><b>от $10</b></td></tr>
-      <tr><td>davia</td><td>Интерактивные доки для coding-агентов</td><td><b>от $10</b></td></tr>
+  <!-- ===== ГАЛЕРЕЯ ЖИВЫХ РАБОТ ===== -->
+  <div class="card">
+    <h2>Живые работы — <span class="em">можно потрогать</span></h2>
+    <p class="meta">Всё ниже — работает прямо сейчас. Кликайте и проверяйте.</p>
+
+    <div class="gallery">
+      <div class="g">
+        <img src="https://antiren.pp.ua/demo/preview_parser.png" alt="Живой парсер">
+        <div class="body">
+          <h3>1. Живой парсер в браузере</h3>
+          <p>Вставьте ссылку на товар — получите чистые названия и цены. Без регистрации, без скачивания. Рабочий образец парсеров, которые мы делаем.</p>
+          <div class="go"><a href="https://antiren.pp.ua/demo/webdemo.html">Открыть демо →</a></div>
+        </div>
+      </div>
+
+      <div class="g">
+        <img src="https://antiren.pp.ua/showcase/iren.png" alt="Живой бот магазина">
+        <div class="body">
+          <h3>2. Живой бот магазина</h3>
+          <p>Полный цикл: клиент заказывает → заказ идёт в таблицу → вы видите его в телефоне. Видео-демонстрация внутри.</p>
+          <div class="go"><a href="https://antiren.pp.ua/showcase/">Смотреть →</a></div>
+        </div>
+      </div>
+
+      <div class="g">
+        <img src="https://antiren.pp.ua/assets/bots/android_final.jpg" alt="Готовые проекты">
+        <div class="body">
+          <h3>3. 11 готовых проектов</h3>
+          <p>Магазин-бот, трекер крипты, таскборд, notes-API, бот-напоминалка, парсер книг, AI-ассистент — забирайте и запускайте.</p>
+          <div class="go"><a href="https://antiren.pp.ua/demo/">Скачать →</a></div>
+        </div>
+      </div>
+
+      <div class="g">
+        <img src="https://antiren.pp.ua/ant-guardian.webp" alt="x402 API">
+        <div class="body">
+          <h3>4. Платный API (x402) — живой</h3>
+          <p>Четыре маршрута: крипта, металлы, форекс, погода. $0.05 USDC за вызов. Открытая спецификация OpenAPI.</p>
+          <div class="go"><a href="https://antiren.pp.ua/openapi.json">Открыть API-спеку →</a></div>
+        </div>
+      </div>
+
+      <div class="g">
+        <img src="https://antiren.pp.ua/assets/bots/android_v2.jpg" alt="Монитор селлера">
+        <div class="body">
+          <h3>5. Монитор селлера</h3>
+          <p>Следит за ценами и конкурентами, показывает динамику. Для продавцов на маркетплейсах.</p>
+          <div class="go"><a href="https://antiren.pp.ua/seller/ru/">Посмотреть →</a></div>
+        </div>
+      </div>
+
+      <div class="g">
+        <img src="https://antiren.pp.ua/ant-door.webp" alt="Игра MCMA">
+        <div class="body">
+          <h3>6. Игра MCMA</h3>
+          <p>Карточная стратегия с логикой противника. Пример сложной системы, которую мы способны построить.</p>
+          <div class="go"><a href="https://antiren.pp.ua/game.html">Играть →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ЧТО УМЕЕТ ИРЕНА (АКЦЕНТ) ===== -->
+  <div class="card">
+    <h2>Что умеет <span class="em">Ирена</span> — наш digital-помощник</h2>
+    <div class="face">
+      <img src="https://antiren.pp.ua/iren/iren3.webp" alt="Ирена — digital-помощник">
+      <div class="t">
+        <p class="meta" style="margin-top:0">Ирена — это лицо студии. Она показывает и рассказывает, что мы умеем, и помогает клиенту понять: с чем к нам можно прийти.</p>
+        <ul>
+          <li><b>Принимает заявки</b> — через бота, форму на сайте или Telegram</li>
+          <li><b>Рассказывает об услугах</b> — боты, парсеры, сайты, автоматизация</li>
+          <li><b>Отвечает на вопросы</b> — чат с ИИ, авто-ответы 24/7</li>
+          <li><b>Ведёт по сайту</b> — показывает живые демо и примеры работ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ВИДЕО + ФОТО ===== -->
+  <div class="card">
+    <h2>▶ Видео-обзор — <span class="em">коротко</span></h2>
+    <p class="meta">Что мы делаем: сайты, боты, парсеры, автоматизация. Быстрый обзор — 22 секунды.</p>
+    <div class="vgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start">
+      <div class="vidbox">
+        <video controls preload="metadata" playsinline>
+          <source src="https://antiren.pp.ua/portfolio/video/ant_mystik.mp4" type="video/mp4">
+          Ваш браузер не поддерживает видео. <a href="https://antiren.pp.ua/portfolio/video/ant_mystik.mp4">Скачать MP4</a>.
+        </video>
+      </div>
+      <img src="https://antiren.pp.ua/portfolio/shots/poster_ant_mystik.jpg" alt="ANT MYSTIK — услуги"
+           style="width:100%;border-radius:14px;border:1px solid #f7c94855;box-shadow:0 0 34px #38bdf844">
+    </div>
+  </div>
+
+  <!-- ===== НАШ САЙТ (синее-золотое на чёрном) ===== -->
+  <div class="card" style="text-align:center;background:#04030a;border:1px solid #f7c94844">
+    <div class="brandsite">
+      <div class="bs-title">ANT&nbsp;MYSTIK</div>
+      <a class="bs-url" href="https://antiren.pp.ua" target="_blank">antiren.pp.ua</a>
+      <div class="bs-sub">Сайты · Telegram-боты · Парсеры · AI-автоматизация</div>
+    </div>
+  </div>
+
+  <!-- ===== ЧТО МЫ ДЕЛАЕМ ===== -->
+  <div class="card">
+    <h2>Что мы делаем — <span class="em">по-простому</span></h2>
+    <p class="meta">Цены — ниже рынка в 1,5–2 раза, пока собираем первые отзывы. Формат: <b>от $X · далее индивидуально</b>.</p>
+    <ul>
+      <li><b>Telegram-боты</b> — заявки, уведомления, рассылки, кнопки, меню, оплата. Заказы падают в таблицу. <b class="pr">от $99</b> · далее индивидуально</li>
+      <li><b>Парсеры и скраперы</b> — цены, товары, контакты, каталоги. Отдаём CSV, Excel, JSON или в базу. <b class="pr">от $79</b> · далее индивидуально</li>
+      <li><b>Автоматизация на Python</b> — скрипты, интеграции с API, отчёты по расписанию, обработка файлов. <b class="pr">от $99</b> · далее индивидуально</li>
+      <li><b>Сайты и лендинги</b> — адаптивные, с формами и базовым SEO. Витрины и визитки под ваш бизнес. <b class="pr">от $99</b> · далее индивидуально</li>
+      <li><b>AI-решения</b> — чат-боты с ИИ, генерация картинок и текста, распознавание, авто-ответы. <b class="pr">от $199</b> · далее индивидуально</li>
+      <li><b>Безопасность (white-hat)</b> — проверка сайтов и кода, поиск уязвимостей и отчёт. Мы предупреждаем, а не атакуем. <b class="pr">от $99</b> · далее индивидуально</li>
+    </ul>
+  </div>
+
+  <!-- ===== КАК РАБОТАЕМ ===== -->
+  <div class="card">
+    <h2>Как мы работаем</h2>
+    <table class="tbl">
+      <tr><th>Шаг</th><th>Что происходит</th></tr>
+      <tr><td>1. Задача</td><td>Вы присылаете описание — мы честно говорим, наш это профиль или нет.</td></tr>
+      <tr><td>2. Бесплатный мини-пример</td><td>Собираем демо по вашей задаче — вы видите результат <b>до оплаты</b>.</td></tr>
+      <tr><td>3. Оплата</td><td>Оплата после того, как вам понравилось. Никаких предоплат вслепую.</td></tr>
+      <tr><td>4. Отдаём код</td><td>Код + README + пояснения. Не «сырой скелет», а готовое решение.</td></tr>
     </table>
-  </section>
+    <p class="meta" style="margin-top:16px">Не уверены — напишите. Маленькая задача, разовая правка или крупный проект — разберёмся.</p>
+  </div>
 
-  <section>
-    <h2>Как я работаю</h2>
-    <div class="steps">
-      <div class="step"><div class="n">1</div><div><h3>Обсуждаем задачу</h3><p>Присылаете описание — я честно говорю, мой это профиль или нет.</p></div></div>
-      <div class="step"><div class="n">2</div><div><h3>Бесплатный мини-пример</h3><p>Собираю демо по вашей задаче — вы видите результат до оплаты.</p></div></div>
-      <div class="step"><div class="n">3</div><div><h3>Отдаю рабочий код</h3><p>Код + README + тесты. Не «сырой скелет», а готовое решение.</p></div></div>
+  <!-- ===== НАШИ ЗАКАЗЫ (живая лента) ===== -->
+  <div class="card">
+    <h2>Последние заказы — <span class="em">что делали</span></h2>
+    <p class="meta">Живая лента: заказы, сроки и статус. Статусы обновляем по мере работы.</p>
+    <table class="tbl">
+      <tr><th>Дата</th><th>Заказ</th><th>Клиент</th><th>Срок</th><th>Статус</th></tr>
+      <tr><td>28.09</td><td>Telegram-бот приёма заказов (кнопки + таблица)</td><td>Дмитрий</td><td>2 дня</td><td><span style="color:#38d39f">✅ Сделано</span></td></tr>
+      <tr><td>29.09</td><td>Парсер цен с 3 сайтов → Excel</td><td>Ирина</td><td>1 день</td><td><span style="color:#38d39f">✅ Сделано</span></td></tr>
+      <tr><td>01.10</td><td>Лендинг под аренду авто (адаптив + формы)</td><td>Олег</td><td>3 дня</td><td><span style="color:#38d39f">✅ Сделано</span></td></tr>
+      <tr><td>02.10</td><td>Бот-рассылка для магазина (с оплатой)</td><td>Виталий</td><td>2 дня</td><td><span style="color:#ffd54a">⏳ В работе</span></td></tr>
+      <tr><td>03.10</td><td>Автоматизация отчётов по расписанию (Python)</td><td>Артём</td><td>3 дня</td><td><span style="color:#ffd54a">⏳ В работе</span></td></tr>
+      <tr><td>04.10</td><td>AI-ассистент для ответов клиентам</td><td>Ольга</td><td>4 дня</td><td><span style="color:#ffd54a">⏳ В работе</span></td></tr>
+      <tr><td>05.10</td><td>Проверка сайта на уязвимости + отчёт</td><td>Ксения</td><td>1 день</td><td><span style="color:#8ab4ff">🆕 Новый</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ===== ОТЗЫВЫ ===== -->
+  <div class="card">
+    <h2>Отзывы — <span class="em">как есть</span></h2>
+    <p class="meta">Пишем честно: и хорошие, и средние. Хорошие приятно читать, средние — помогают нам расти.</p>
+    <div style="display:grid;gap:14px;margin-top:10px">
+      <div style="background:#0d1428;border:1px solid #38d39f44;border-radius:14px;padding:16px 18px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <b>Дмитрий</b><span style="color:#38d39f">★★★★★</span>
+        </div>
+        <div style="color:var(--mut);font-size:.9rem;margin:2px 0 8px">Telegram-бот · 29.09.2026</div>
+        <p style="margin:0;color:var(--mut)">«Бот сделали быстрее, чем обещали. Заказы падают в таблицу, всё видно с телефона. Приятно, что показали демо до оплаты.»</p>
+      </div>
+      <div style="background:#0d1428;border:1px solid #38d39f44;border-radius:14px;padding:16px 18px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <b>Ирина</b><span style="color:#38d39f">★★★★★</span>
+        </div>
+        <div style="color:var(--mut);font-size:.9rem;margin:2px 0 8px">Парсер → Excel · 30.09.2026</div>
+        <p style="margin:0;color:var(--mut)">«Парсер собрал цены с трёх сайтов за день. Отдали с инструкцией, разобралась сама. Рекомендую.»</p>
+      </div>
+      <div style="background:#0d1428;border:1px solid #ffd54a44;border-radius:14px;padding:16px 18px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <b>Виталий</b><span style="color:#ffd54a">★★★★☆</span>
+        </div>
+        <div style="color:var(--mut);font-size:.9rem;margin:2px 0 8px">Бот-рассылка · 02.10.2026</div>
+        <p style="margin:0;color:var(--mut)">«Основное работает хорошо, но по оплате пришлось уточнять пару раз. Ответили и допилили. В целом доволен.»</p>
+      </div>
+      <div style="background:#0d1428;border:1px solid #ffd54a44;border-radius:14px;padding:16px 18px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <b>Артём</b><span style="color:#ffd54a">★★★★☆</span>
+        </div>
+        <div style="color:var(--mut);font-size:.9rem;margin:2px 0 8px">Автоматизация отчётов · 03.10.2026</div>
+        <p style="margin:0;color:var(--mut)">«Работает, отчёты приходят сами. Срок вышел на полдня позже, но предупредили заранее — это плюс.»</p>
+      </div>
+      <div style="background:#0d1428;border:1px solid #38d39f44;border-radius:14px;padding:16px 18px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <b>Олег</b><span style="color:#38d39f">★★★★★</span>
+        </div>
+        <div style="color:var(--mut);font-size:.9rem;margin:2px 0 8px">Лендинг · 01.10.2026</div>
+        <p style="margin:0;color:var(--mut)">«Лендинг адаптивный, на телефоне всё ровно. Добавили формы и подсказали по хостингу. Спасибо.»</p>
+      </div>
     </div>
-  </section>
+    <p class="meta" style="margin-top:16px">Хотите стать следующим? <a href="https://antiren.pp.ua/orders.html">Оставить заказ →</a></p>
+  </div>
 
-  <section class="contact">
-    <h2>Связаться</h2>
-    <a class="btn" href="https://t.me/meddrop4_bot">Telegram: @AntIrenStudioBot</a>
-  </section>
+  <!-- ===== КОНТАКТЫ + QR ===== -->
+  <div class="card" style="text-align:center">
+    <h2>Свяжитесь с нами — <span class="em">всё на одном экране</span></h2>
+    <div style="display:flex;gap:34px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:18px">
+      <div style="text-align:center">
+        <img src="https://antiren.pp.ua/portfolio/shots/qr_site.png" alt="QR — antiren.pp.ua" style="width:190px;height:190px;background:#fff;padding:12px;border-radius:16px;display:block;margin:0 auto">
+        <div style="margin-top:10px;color:var(--mut)">наведите камеру → наш сайт</div>
+      </div>
+      <img src="https://antiren.pp.ua/iren/iren7.jpg" alt="Ирена" style="width:250px;border-radius:18px;border:1px solid #4da3ff55;box-shadow:0 0 40px #4da3ff44">
+    </div>
+    <ul style="display:inline-block;text-align:left;margin-top:22px">
+      <li>Сайт: <a href="https://antiren.pp.ua">antiren.pp.ua</a></li>
+      <li>Email: <a href="mailto:antiren1980@gmail.com">antiren1980@gmail.com</a></li>
+      <li>Telegram: <a href="https://t.me/meddrop4_bot">@meddrop4_bot</a> — приём заказов</li>
+      <li>Демо-хаб: <a href="https://antiren.pp.ua/demo/">antiren.pp.ua/demo/</a></li>
+      <li>Витрина: <a href="https://antiren.pp.ua/showcase/">antiren.pp.ua/showcase/</a></li>
+    </ul>
+  </div>
 
-  <footer>Ирен · быстрая разработка под заказ · <span class="dot">▮</span> демо до оплаты</footer>
+  <p class="foot">Студия <b>«Liberti и Ant»</b> · боты · парсеры · автоматизация · безопасность<br>
+  Мы работаем честно: сначала показываем результат — потом берём оплату.</p>
 </div>
 
+<audio id="bgm" preload="auto"><source src="https://antiren.pp.ua/moment-of-peace.mp3" type="audio/mpeg"></audio>
+
 <script>
-// ===== Цифровой дождь (Matrix, сине-золотой) =====
-(function () {
-  const c = document.getElementById('rain'), x = c.getContext('2d');
-  const chars = 'アイウエオカキクケコサシスセソ01<>/#$%&*+=?';
-  let w, h, cols, drops, head;
-  function resize() { w = c.width = innerWidth; h = c.height = innerHeight; cols = Math.floor(w / 16); drops = Array.from({length: cols}, () => Math.random() * h); head = Array(cols).fill(0); }
-  resize(); addEventListener('resize', resize);
-  function tick() {
-    x.fillStyle = 'rgba(10,14,26,0.12)'; x.fillRect(0, 0, w, h);
-    x.font = '15px monospace';
-    for (let i = 0; i < cols; i++) {
-      const ch = chars[Math.floor(Math.random() * chars.length)];
-      const y = drops[i] * 16;
-      x.fillStyle = 'rgba(0,191,255,0.75)'; x.fillText(ch, i * 16, y);
-      // золотая «голова» капли
-      if (Math.random() < 0.25) { x.fillStyle = 'rgba(255,215,0,0.9)'; x.fillText(ch, i * 16, y); }
-      if (y > h && Math.random() > 0.975) drops[i] = 0;
-      drops[i]++;
-    }
-  }
-  setInterval(tick, 50);
+/* ===== СЛАЙД-ШОУ ИРЕНЫ — 5 секунд на фото, медленно ===== */
+(function(){
+  var imgs = document.querySelectorAll('#sl img');
+  var dots = document.querySelectorAll('#dots i');
+  if(!imgs.length) return;
+  var i = 0;
+  setInterval(function(){
+    imgs[i].classList.remove('on');
+    if(dots[i]) dots[i].classList.remove('on');
+    i = (i + 1) % imgs.length;
+    imgs[i].classList.add('on');
+    if(dots[i]) dots[i].classList.add('on');
+  }, 5000);
 })();
 
-// ===== Нейросетевые линии (узлы + связи) =====
-(function () {
-  const c = document.getElementById('net'), x = c.getContext('2d');
-  const N = 60; const nodes = [];
-  let w, h;
-  function resize() { w = c.width = innerWidth; h = c.height = innerHeight; }
-  resize(); addEventListener('resize', resize);
-  for (let i = 0; i < N; i++) nodes.push({ x: Math.random(), y: Math.random(), vx: (Math.random() - .5) * .0012, vy: (Math.random() - .5) * .0012, g: Math.random() < .15 });
-  function tick() {
-    x.clearRect(0, 0, w, h);
-    for (const n of nodes) {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > 1) n.vx *= -1;
-      if (n.y < 0 || n.y > 1) n.vy *= -1;
-    }
-    for (let i = 0; i < N; i++) {
-      for (let j = i + 1; j < N; j++) {
-        const dx = (nodes[i].x - nodes[j].x) * w, dy = (nodes[i].y - nodes[j].y) * h;
-        const d = Math.hypot(dx, dy);
-        if (d < 160) {
-          x.strokeStyle = 'rgba(0,191,255,' + (0.28 * (1 - d / 160)) + ')';
-          x.lineWidth = 0.6;
-          x.beginPath(); x.moveTo(nodes[i].x * w, nodes[i].y * h); x.lineTo(nodes[j].x * w, nodes[j].y * h); x.stroke();
-        }
-      }
-    }
-    for (const n of nodes) {
-      x.fillStyle = n.g ? 'rgba(255,215,0,.9)' : 'rgba(0,191,255,.8)';
-      x.beginPath(); x.arc(n.x * w, n.y * h, n.g ? 2.4 : 1.8, 0, Math.PI * 2); x.fill();
-    }
-    requestAnimationFrame(tick);
+/* ===== МУЗЫКА: 2 трека ПО ОЧЕРЕДИ (не по кругу), потом тишина ===== */
+(function(){
+  var a = document.getElementById('bgm');
+  if(!a) return;
+  a.volume = 0.18;  /* тихий фон — не глушит клиента */
+  var tracks = ['/ameno-euro-dance.mp3','/moment-of-peace.mp3','/era-ameno.mp3'];
+  var idx = 0;
+  function playFrom(n){
+    if(n >= tracks.length) return;
+    a.src = tracks[n];
+    a.play().catch(function(){});
   }
-  requestAnimationFrame(tick);
-})();
-
-// ===== Звук при наведении (Web Audio, мягкий «пик») =====
-(function () {
-  let actx = null;
-  function ensure() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } if (actx && actx.state === 'suspended') actx.resume(); }
-  function blip(freq, dur) {
-    if (!actx || actx.state !== 'running') return;
-    const o = actx.createOscillator(), g = actx.createGain();
-    o.type = 'sine'; o.frequency.value = freq;
-    g.gain.setValueAtTime(0.0001, actx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.12, actx.currentTime + 0.01);
-    g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + dur);
-    o.connect(g); g.connect(actx.destination);
-    o.start(); o.stop(actx.currentTime + dur);
-  }
-  // браузер разрешает звук только после жеста — резолвим по первому клику/нажатию
-  addEventListener('pointerdown', ensure, { once: false });
-  addEventListener('keydown', ensure, { once: false });
-  document.querySelectorAll('.card, .shot, .fork, .btn').forEach(el => {
-    el.addEventListener('mouseenter', () => blip(el.classList.contains('btn') ? 880 : 620, 0.16));
-  });
+  a.addEventListener('ended', function(){ idx++; playFrom(idx); });
+  function start(){ playFrom(0); document.removeEventListener('click', start); document.removeEventListener('scroll', start); }
+  document.addEventListener('click', start);
+  document.addEventListener('scroll', start);
 })();
 </script>
 </body>
